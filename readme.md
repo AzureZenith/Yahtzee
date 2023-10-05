@@ -23,22 +23,22 @@ Players roll dice to get certain combos. best total after 13 rounds wins.
 
 Unicode characters 2680-2685: ⚀⚁⚂⚃⚄⚅
 
-### Game Mock-ups
-
-``┏━━━━┳┓``<br>
-``┃    ┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Ones┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Twos┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Threes┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Fours┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Fives┃┃``<br>
-``┣━━━━╋┫``<br>
-``┃Sixes┃┃``<br>
+### Game Mock-up
+``[Roll Dice]``
+### ``⚀⚁⚂⚃⚄⚅``
+``┏━━━━━━┳━┓``<br>
+``┃Ones  ┃ ┃``<br>
+``┣━━━━━━╋━┫``<br>
+``┃Twos  ┃ ┃``<br>
+``┣━━━━━━╋━┫``<br>
+``┃Threes┃ ┃``<br>
+``┣━━━━━━╋━┫``<br>
+``┃Fours ┃ ┃``<br>
+``┣━━━━━━╋━┫``<br>
+``┃Fives ┃ ┃``<br>
+``┣━━━━━━╋━┫``<br>
+``┃Sixes ┃ ┃``<br>
+``┗━━━━━━┻━┛``<br>
 
 ### Playing Instructions
 -
