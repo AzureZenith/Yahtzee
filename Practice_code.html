@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style>
+            *{
+                font-family: monospace;
+                font-size: 36px;
+            }
+        </style>
+    </head>
+
+    <body onload="workDammit()">
+        <script>
+            const dice = [];
+            function workDammit()
+            {
+                for(var i=0;i<5;i++)
+                {
+                    dice[i]=Math.floor(Math.random() * 6);
+                }
+                for(var i=0;i<5;i++)
+                {
+                    document.getElementById("dice").innerHTML+=String.fromCharCode(9856+dice[i]);
+                }
+                dice.sort((a,b)=>a-b);
+                for(var i=0;i<5;i++)
+                {
+                    document.getElementById("sorted").innerHTML+=String.fromCharCode(9856+dice[i]);
+                }
+                document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight"
+            }
+            function isSmallStraight(sortedDice) {
+                const straights = ["1234", "2345", "3456"];
+                const diceString = sortedDice.join("");
+                return straights.some(straight => diceString.includes(straight));
+            }
+            
+        </script>
+        <p id="dice">
+        </p>
+        <p id="sorted">
+        </p>
+        <p id="straight">
+        </p>
+    </body>
+</html>
