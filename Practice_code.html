@@ -37,26 +37,53 @@
                         {
                             result+= "-";
                         }
+                        if(!this.lockedIn)
+                        {
+                            result+=String.fromCharCode(8194)+String.fromCharCode(8194);
+                        }
                         return result;
                     };
                     dice[i].roll=function()
                     {
-                        this.value=1+Math.floor(Math.random() * 6);
+                        if(! this.lockedIn)
+                        {
+                            this.value=1+Math.floor(Math.random() * 6);
+                        }
                         //Randomize lockedIn to test rendering.
                         //this.lockedIn=(Math.random()<0.5);
                     };
+                    dice[i].toggle=function()
+                    {
+                        if(this.lockedIn)
+                        {this.lockedIn=false;}
+                        else
+                        {this.lockedIn=true;}
+                    };
                 }
+                //I made more than 5 attempts to do this with a loop.
+                //At which point, it's easier to do all five cases.
+                document.getElementById("dice").children[0].onclick = function()
+                {dice[0].toggle();render();};
+                document.getElementById("dice").children[2].onclick = function()
+                {dice[1].toggle();render();};
+                document.getElementById("dice").children[4].onclick = function()
+                {dice[2].toggle();render();};
+                document.getElementById("dice").children[6].onclick = function()
+                {dice[3].toggle();render();};
+                document.getElementById("dice").children[8].onclick = function()
+                {dice[4].toggle();render();};
                 render();
             }
             function render()
             {
-                document.getElementById("dice").innerHTML="";
+                //document.getElementById("dice").innerHTML="";
                 document.getElementById("sorted").innerHTML="";
                 for(var i=0;i<5;i++)
                 {
-                    document.getElementById("dice").innerHTML+=dice[i].toString()+"<br>";
+                    document.getElementById("dice").children[i*2].innerHTML=dice[i].toString();
                 }
-                document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight";
+                //document.getElementById("die0").innerHTML="Testing";
+                //document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight";
             }
             function rollAll()
             {
@@ -78,8 +105,16 @@
                 return straights.some(straight => diceString.includes(straight));
             }
         </script>
-        <p id="dice">
-        </p>
+        <div id="dice">
+            <!-- I really wanted to automate the instanciation of these elements,
+                but it kept messing up all kinds of other parts of the script.
+                Eventually I gave up. Hardcoding 5 paragraph elements is way easier -->
+            <button id="die0"></button><br>
+            <button id="die1"></button><br>
+            <button id="die2"></button><br>
+            <button id="die3"></button><br>
+            <button id="die4"></button>
+        </div>
         <button id="roll_button">
             Roll dice
         </button>
