@@ -11,29 +11,41 @@
         </style>
     </head>
 
-    <body onload="workDammit()">
+    <body onload="load()">
         <script>
-            const dice = [];
-            function workDammit()
+            const dice = [0,0,0,0,0];
+            function roll()
             {
                 for(var i=0;i<5;i++)
                 {
-                    dice[i]=Math.floor(Math.random() * 6);
+                    dice[i]=1+Math.floor(Math.random() * 6);
                 }
-                for(var i=0;i<5;i++)
-                {
-                    document.getElementById("dice").innerHTML+=String.fromCharCode(9856+dice[i]);
-                }
-                dice.sort((a,b)=>a-b);
-                for(var i=0;i<5;i++)
-                {
-                    document.getElementById("sorted").innerHTML+=String.fromCharCode(9856+dice[i]);
-                }
-                document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight"
+                render();
             }
-            function isSmallStraight(sortedDice) {
+            function render()
+            {
+                document.getElementById("sorted").innerHTML="";
+                document.getElementById("dice").innerHTML="";
+                for(var i=0;i<5;i++)
+                {
+                    document.getElementById("dice").innerHTML+=String.fromCharCode(9855+dice[i])+"<br>";
+                }
+                document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight";
+            }
+            function load()
+            {
+                render();
+                document.getElementById("dice").setAttribute("onclick","roll()");
+            }
+            function isSmallStraight(input) {
+            
+                input.sort((a,b)=>a-b);
+                for(var i=0;i<5;i++)
+                {
+                    document.getElementById("sorted").innerHTML+=String.fromCharCode(9855+input[i]);
+                }
                 const straights = ["1234", "2345", "3456"];
-                const diceString = sortedDice.join("");
+                const diceString = input.join("");
                 return straights.some(straight => diceString.includes(straight));
             }
             
@@ -43,6 +55,21 @@
         <p id="sorted">
         </p>
         <p id="straight">
+        </p>
+        <p>
+            ┏━━━━━━┳━┓<br>
+            ┃ Ones ┃ ┃<br>
+            ┣━━━━━━╋━┫<br>
+            ┃ Twos ┃ ┃<br>
+            ┣━━━━━━╋━┫<br>
+            ┃Threes┃ ┃<br>
+            ┣━━━━━━╋━┫<br>
+            ┃Fours ┃ ┃<br>
+            ┣━━━━━━╋━┫<br>
+            ┃Fives ┃ ┃<br>
+            ┣━━━━━━╋━┫<br>
+            ┃Sixes ┃ ┃<br>
+            ┗━━━━━━┻━┛
         </p>
     </body>
 </html>
