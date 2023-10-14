@@ -6,36 +6,57 @@
         <style>
             *{
                 font-family: monospace;
-                font-size: 36px;
+                font-size: 24px;
             }
         </style>
     </head>
 
     <body onload="load()">
         <script>
-            const dice = [0,0,0,0,0];
-            function roll()
+            const dice=[0,0,0,0,0];
+            function load()
             {
+                document.getElementById("roll_button").setAttribute("onclick","rollAll()");
                 for(var i=0;i<5;i++)
                 {
-                    dice[i]=1+Math.floor(Math.random() * 6);
+                    dice[i]=new Object();
+                    dice[i].value=0;
+                    dice[i].lockedIn=false;
+                    dice[i].toString=function()
+                    {
+                        if(this.value>=1 && this.value<=6)
+                        {
+                            return String.fromCharCode(9855+this.value);
+                        }
+                        else
+                        {
+                            return "-";
+                        }
+                    };
+                    dice[i].roll=function()
+                    {
+                        this.value=1+Math.floor(Math.random() * 6);
+                    };
                 }
                 render();
             }
             function render()
             {
-                document.getElementById("sorted").innerHTML="";
                 document.getElementById("dice").innerHTML="";
+                document.getElementById("sorted").innerHTML="";
                 for(var i=0;i<5;i++)
                 {
-                    document.getElementById("dice").innerHTML+=String.fromCharCode(9855+dice[i])+"<br>";
+                    document.getElementById("dice").innerHTML+=dice[i].toString()+"<br>";
                 }
                 document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight";
             }
-            function load()
+            function rollAll()
             {
+                for(var i=0;i<5;i++)
+                {
+                    dice[i].roll();
+                }
                 render();
-                document.getElementById("dice").setAttribute("onclick","roll()");
             }
             function isSmallStraight(input) {
             
@@ -48,10 +69,12 @@
                 const diceString = input.join("");
                 return straights.some(straight => diceString.includes(straight));
             }
-            
         </script>
         <p id="dice">
         </p>
+        <button id="roll_button">
+            Roll dice
+        </button>
         <p id="sorted">
         </p>
         <p id="straight">
