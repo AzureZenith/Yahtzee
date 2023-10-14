@@ -24,18 +24,26 @@
                     dice[i].lockedIn=false;
                     dice[i].toString=function()
                     {
+                        var result ="";
+                        if(this.lockedIn)
+                        {
+                            result+=String.fromCharCode(8194)+String.fromCharCode(8194);
+                        }
                         if(this.value>=1 && this.value<=6)
                         {
-                            return String.fromCharCode(9855+this.value);
+                            result+= String.fromCharCode(9855+this.value);
                         }
                         else
                         {
-                            return "-";
+                            result+= "-";
                         }
+                        return result;
                     };
                     dice[i].roll=function()
                     {
                         this.value=1+Math.floor(Math.random() * 6);
+                        //Randomize lockedIn to test rendering.
+                        //this.lockedIn=(Math.random()<0.5);
                     };
                 }
                 render();
