@@ -7,6 +7,21 @@
             *{
                 font-family: monospace;
                 font-size: 24px;
+                box-sizing: border-box;
+            }
+            /* Create two equal columns that floats next to each other */
+            .column
+            {
+                float: left;
+                width: 50%;
+                padding: 10px;
+            }
+            /* Clear floats after the columns */
+            .row:after
+            {
+                content: "";
+                display: table;
+                clear: both;
             }
         </style>
     </head>
@@ -116,24 +131,26 @@
                 return straights.some(straight => diceString.includes(straight));
             }
         </script>
-        <div id="dice">
-            <!-- I really wanted to automate the instanciation of these elements,
-                but it kept messing up all kinds of other parts of the script.
-                Eventually I gave up. Hardcoding 5 paragraph elements is way easier -->
-            <button id="die0"></button><br>
-            <button id="die1"></button><br>
-            <button id="die2"></button><br>
-            <button id="die3"></button><br>
-            <button id="die4"></button>
+        <div class="column">
+            <div id="dice">
+                <!-- I really wanted to automate the instanciation of these elements,
+                    but it kept messing up all kinds of other parts of the script.
+                    Eventually I gave up. Hardcoding 5 paragraph elements is way easier -->
+                <button id="die0"></button><br>
+                <button id="die1"></button><br>
+                <button id="die2"></button><br>
+                <button id="die3"></button><br>
+                <button id="die4"></button>
+            </div>
+            <button id="roll_button">
+                Roll dice
+            </button>
+            <p id="sorted">
+            </p>
+            <p id="straight">
+            </p>
         </div>
-        <button id="roll_button">
-            Roll dice
-        </button>
-        <p id="sorted">
-        </p>
-        <p id="straight">
-        </p>
-        <p>
+        <div class="column">
             ┏━━━━━━┳━┓<br>
             ┃ Ones ┃ ┃<br>
             ┣━━━━━━╋━┫<br>
@@ -147,6 +164,6 @@
             ┣━━━━━━╋━┫<br>
             ┃Sixes ┃ ┃<br>
             ┗━━━━━━┻━┛
-        </p>
+        </div>
     </body>
 </html>
