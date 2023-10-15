@@ -14,6 +14,7 @@
     <body onload="load()">
         <script>
             const dice=[0,0,0,0,0];
+            var rollsRemaining=3;
             function load()
             {
                 document.getElementById("roll_button").setAttribute("onclick","rollAll()");
@@ -76,23 +77,33 @@
             }
             function render()
             {
-                //document.getElementById("dice").innerHTML="";
-                document.getElementById("sorted").innerHTML="";
+                document.getElementById("sorted").innerHTML="Rolls remaining: "+rollsRemaining;
                 for(var i=0;i<5;i++)
                 {
                     document.getElementById("dice").children[i*2].innerHTML=dice[i].toString();
                 }
-                //document.getElementById("die0").innerHTML="Testing";
-                //document.getElementById("straight").innerHTML=isSmallStraight(dice)?"Straight!":"Not straight";
+                if(rollsRemaining<=0 || dice.every(checkLock))
+                {
+                    document.getElementById("roll_button").disabled=true;
+                }
+                else
+                {
+                    document.getElementById("roll_button").disabled=false;
+                }
             }
             function rollAll()
             {
-                for(var i=0;i<5;i++)
+                if(rollsRemaining>0)
                 {
-                    dice[i].roll();
+                    for(var i=0;i<5;i++)
+                    {
+                        dice[i].roll();
+                    }
+                    rollsRemaining--;
+                    render();
                 }
-                render();
             }
+            function checkLock(die){return die.lockedIn;}
             function isSmallStraight(input) {
             
                 input.sort((a,b)=>a-b);
