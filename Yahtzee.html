@@ -150,6 +150,7 @@
                 for(var i=0;i<5;i++)
                 {
                     dice[i].value=0;
+                    dice[i].lockedIn=false;
                     vals[i]=0;
                 }
                 render();
@@ -208,13 +209,13 @@
                 {
                     if(ones.prospectiveScore>0&& !ones.lockedIn)
                     {
-                        ones.style="color: red;";
+                        ones.style="color: white;background: black;";
                         ones.innerHTML=alignRight(ones.prospectiveScore,3);
                     }
                 };
                 ones.onmouseleave=function()
                 {
-                    ones.style="color: black;";
+                    ones.style="color: black; background: white;";
                     ones.innerHTML=alignRight(ones.score,3);
                 };
                 ones.onclick=function()
@@ -242,13 +243,13 @@
                     //alert("mouse entered twos\nprospective score: "+twos.prospectiveScore);
                     if(twos.prospectiveScore>0&& !twos.lockedIn)
                     {
-                        twos.style="color: red;";
+                        twos.style="color: white;background: black;";
                         twos.innerHTML=alignRight(twos.prospectiveScore,3);
                     }
                 };
                 twos.onmouseleave=function()
                 {
-                    twos.style="color: black;";
+                    twos.style="color: black; background: white;";
                     twos.innerHTML=alignRight(twos.score,3);
                 };
                 twos.onclick=function()
@@ -274,13 +275,13 @@
                 {
                     if(threes.prospectiveScore>0&& !threes.lockedIn)
                     {
-                        threes.style="color: red;";
+                        threes.style="color: white;background: black;";
                         threes.innerHTML=alignRight(threes.prospectiveScore,3);
                     }
                 };
                 threes.onmouseleave=function()
                 {
-                    threes.style="color: black;";
+                    threes.style="color: black; background: white;";
                     threes.innerHTML=alignRight(threes.score,3);
                 };
                 threes.onclick=function()
@@ -300,13 +301,13 @@
                 {
                     if(fours.prospectiveScore>0&& !fours.lockedIn)
                     {
-                        fours.style="color: red;";
+                        fours.style="color: white;background: black;";
                         fours.innerHTML=alignRight(fours.prospectiveScore,3);
                     }
                 };
                 fours.onmouseleave=function()
                 {
-                    fours.style="color: black;";
+                    fours.style="color: black; background: white;";
                     fours.innerHTML=alignRight(fours.score,3);
                 };
                 fours.onclick=function()
@@ -326,13 +327,13 @@
                 {
                     if(fives.prospectiveScore>0&& !fives.lockedIn)
                     {
-                        fives.style="color: red;";
+                        fives.style="color: white;background: black;";
                         fives.innerHTML=alignRight(fives.prospectiveScore,3);
                     }
                 };
                 fives.onmouseleave=function()
                 {
-                    fives.style="color: black;";
+                    fives.style="color: black; background: white;";
                     fives.innerHTML=alignRight(fives.score,3);
                 };
                 fives.onclick=function()
@@ -352,13 +353,13 @@
                 {
                     if(sixes.prospectiveScore>0&& !sixes.lockedIn)
                     {
-                        sixes.style="color: red;";
+                        sixes.style="color: white;background: black;";
                         sixes.innerHTML=alignRight(sixes.prospectiveScore,3);
                     }
                 };
                 sixes.onmouseleave=function()
                 {
-                    sixes.style="color: black;";
+                    sixes.style="color: black; background: white;";
                     sixes.innerHTML=alignRight(sixes.score,3);
                 };
                 sixes.onclick=function()
@@ -381,6 +382,9 @@
                 fours.prospectiveScore=sumWhere(vals,4);
                 fives.prospectiveScore=sumWhere(vals,5);
                 sixes.prospectiveScore=sumWhere(vals,6);
+                var scores=[ones.score,twos.score,threes.score,fours.score,fives.score,sixes.score];
+                total.score=sum(scores)-sumWhere(scores,-1);
+                total.innerHTML=alignRight(total.score,3);
             }
             function sum(arr)
             {
@@ -428,17 +432,19 @@
         </script>
         <div class="column">
             ┏━━━━━━┳━━━┓<br>
-            ┃ Ones ┃<span id="ones">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃ Ones ┃<span id="ones">&nbsp;-&nbsp;</span>┃<br>
             ┣━━━━━━╋━━━┫<br>
-            ┃ Twos ┃<span id="twos">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃ Twos ┃<span id="twos">&nbsp;-&nbsp;</span>┃<br>
             ┣━━━━━━╋━━━┫<br>
-            ┃Threes┃<span id="threes">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃Threes┃<span id="threes">&nbsp;-&nbsp;</span>┃<br>
             ┣━━━━━━╋━━━┫<br>
-            ┃Fours ┃<span id="fours">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃Fours ┃<span id="fours">&nbsp;-&nbsp;</span>┃<br>
             ┣━━━━━━╋━━━┫<br>
-            ┃Fives ┃<span id="fives">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃Fives ┃<span id="fives">&nbsp;-&nbsp;</span>┃<br>
             ┣━━━━━━╋━━━┫<br>
-            ┃Sixes ┃<span id="sixes">&nbsp;&nbsp;&nbsp;</span>┃<br>
+            ┃Sixes ┃<span id="sixes">&nbsp;-&nbsp;</span>┃<br>
+            ╞══════╪═══╡<br>
+            ┃Total ┃<span id="total">&nbsp;-&nbsp;</span>┃<br>
             ┗━━━━━━┻━━━┛
         </div>
     </body>
