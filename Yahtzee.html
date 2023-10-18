@@ -128,7 +128,7 @@
                 {
                     document.getElementById("roll_button").disabled=false;
                 }
-                //renderScorecard();
+                renderScorecard();
             }
             function rollAll()
             {
@@ -180,31 +180,43 @@
             var numToCheck=-1;
             function loadScorecard()
             {
+                const ones=document.getElementById("ones");
                 //alert("loading scorecard...");
-                var ones=document.getElementById("ones");
-                ones.eligible=false;
+                //alert(ones);
+                //alert(document.getElementById("ones"));
+                ones.lockedIn=false;
                 ones.score=-1;
                 //alert("in loadScoreCard, nothing calculated yet.");
-                /*ones.prospectiveScore=sumWhere(vals,function(num){
-                    alert("in anonymous function being passed to sumWhere.")
-                    num=1;
-                    });
-                alert("in loadScoreCard, prospectiveScore initialized to "+ones.prospectiveScore);*/
+                ones.prospectiveScore=sumWhere(vals,1);
+                //alert("in loadScoreCard, prospectiveScore initialized to "+ones.prospectiveScore);
                 ones.onmouseenter=function()
                 {
-                    if(ones.prospectiveScore!=0)
+                    if(ones.prospectiveScore>0&& !ones.lockedIn)
                     {
+                        ones.style="color: red;";
                         ones.innerHTML=alignRight(ones.prospectiveScore,3);
                     }
                 };
                 ones.onmouseleave=function()
                 {
+                    ones.style="color: black;";
                     ones.innerHTML=alignRight(ones.score,3);
                 };
+                ones.onclick=function()
+                {
+                    //alert("click detected.\nones: "+ones+"\nprospectiveScore: "+ones.prospectiveScore+"\nlockedIn: "+ones.lockedIn);
+                    if(ones.prospectiveScore>0&& !ones.lockedIn)
+                    {
+                        //alert("So score should be updated");
+                        ones.score=ones.prospectiveScore;
+                        ones.lockedIn=true;
+                    }
+                }
             }
             function renderScorecard()
             {
-                alert("This function not yet implemented.");
+                //alert("rendering scorecard")
+                ones.prospectiveScore=sumWhere(vals,1);
             }
             function sum(arr)
             {
