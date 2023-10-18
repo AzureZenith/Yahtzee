@@ -267,12 +267,120 @@
                         //alert("vals are now"+dice);
                     }
                 }
+                threes.lockedIn=false;
+                threes.score=-1;
+                threes.prospectiveScore=sumWhere(vals,3);
+                threes.onmouseenter=function()
+                {
+                    if(threes.prospectiveScore>0&& !threes.lockedIn)
+                    {
+                        threes.style="color: red;";
+                        threes.innerHTML=alignRight(threes.prospectiveScore,3);
+                    }
+                };
+                threes.onmouseleave=function()
+                {
+                    threes.style="color: black;";
+                    threes.innerHTML=alignRight(threes.score,3);
+                };
+                threes.onclick=function()
+                {
+                    if(threes.prospectiveScore>0&& !threes.lockedIn)
+                    {
+                        threes.score=threes.prospectiveScore;
+                        threes.lockedIn=true;
+                        rollsRemaining=3;
+                        resetDice();
+                    }
+                }
+                fours.lockedIn=false;
+                fours.score=-1;
+                fours.prospectiveScore=sumWhere(vals,4);
+                fours.onmouseenter=function()
+                {
+                    if(fours.prospectiveScore>0&& !fours.lockedIn)
+                    {
+                        fours.style="color: red;";
+                        fours.innerHTML=alignRight(fours.prospectiveScore,3);
+                    }
+                };
+                fours.onmouseleave=function()
+                {
+                    fours.style="color: black;";
+                    fours.innerHTML=alignRight(fours.score,3);
+                };
+                fours.onclick=function()
+                {
+                    if(fours.prospectiveScore>0&& !fours.lockedIn)
+                    {
+                        fours.score=fours.prospectiveScore;
+                        fours.lockedIn=true;
+                        rollsRemaining=3;
+                        resetDice();
+                    }
+                }
+                fives.lockedIn=false;
+                fives.score=-1;
+                fives.prospectiveScore=sumWhere(vals,5);
+                fives.onmouseenter=function()
+                {
+                    if(fives.prospectiveScore>0&& !fives.lockedIn)
+                    {
+                        fives.style="color: red;";
+                        fives.innerHTML=alignRight(fives.prospectiveScore,3);
+                    }
+                };
+                fives.onmouseleave=function()
+                {
+                    fives.style="color: black;";
+                    fives.innerHTML=alignRight(fives.score,3);
+                };
+                fives.onclick=function()
+                {
+                    if(fives.prospectiveScore>0&& !fives.lockedIn)
+                    {
+                        fives.score=fives.prospectiveScore;
+                        fives.lockedIn=true;
+                        rollsRemaining=3;
+                        resetDice();
+                    }
+                }
+                sixes.lockedIn=false;
+                sixes.score=-1;
+                sixes.prospectiveScore=sumWhere(vals,6);
+                sixes.onmouseenter=function()
+                {
+                    if(sixes.prospectiveScore>0&& !sixes.lockedIn)
+                    {
+                        sixes.style="color: red;";
+                        sixes.innerHTML=alignRight(sixes.prospectiveScore,3);
+                    }
+                };
+                sixes.onmouseleave=function()
+                {
+                    sixes.style="color: black;";
+                    sixes.innerHTML=alignRight(sixes.score,3);
+                };
+                sixes.onclick=function()
+                {
+                    if(sixes.prospectiveScore>0&& !sixes.lockedIn)
+                    {
+                        sixes.score=sixes.prospectiveScore;
+                        sixes.lockedIn=true;
+                        rollsRemaining=3;
+                        resetDice();
+                    }
+                }
             }
             function renderScorecard()
             {
                 //alert("rendering scorecard")
                 ones.prospectiveScore=sumWhere(vals,1);
                 twos.prospectiveScore=sumWhere(vals,2);
+                threes.prospectiveScore=sumWhere(vals,3);
+                fours.prospectiveScore=sumWhere(vals,4);
+                fives.prospectiveScore=sumWhere(vals,5);
+                sixes.prospectiveScore=sumWhere(vals,6);
             }
             function sum(arr)
             {
