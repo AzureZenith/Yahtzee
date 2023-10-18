@@ -43,6 +43,7 @@
                 document.getElementById("roll_button").setAttribute("onclick","rollAll()");
                 for(var i=0;i<5;i++)
                 {
+                    //setting up the dice[i]...
                     dice[i]=new Object();
                     dice[i].value=0;
                     dice[i].lockedIn=false;
@@ -83,10 +84,16 @@
                         else
                         {this.lockedIn=true;}
                     };
+                    //setting up corresponding element in HTML doc...
+                    document.getElementById("dice").children[2*i].index=i;
+                    //alert("updated index for die" + i + " to " + document.getElementById("dice").children[2*i].index);
+                    document.getElementById("dice").children[2*i].onclick
+                        =function(){dice[this.index].toggle();render();};
+                    //alert("updated onclick for die" + i);
                 }
                 //I made more than 5 attempts to do this with a loop.
                 //At which point, it's easier to do all five cases.
-                document.getElementById("dice").children[0].onclick = function()
+                /*document.getElementById("dice").children[0].onclick = function()
                 {dice[0].toggle();render();};
                 document.getElementById("dice").children[2].onclick = function()
                 {dice[1].toggle();render();};
@@ -95,7 +102,7 @@
                 document.getElementById("dice").children[6].onclick = function()
                 {dice[3].toggle();render();};
                 document.getElementById("dice").children[8].onclick = function()
-                {dice[4].toggle();render();};
+                {dice[4].toggle();render();};*/
 
                 //After loading dice manager, load scorecard manager.
                 //alert("Dice manager loaded successfully.");
