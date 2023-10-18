@@ -144,6 +144,16 @@
                     render();
                 }
             }
+            function resetDice()
+            {
+                //alert("resetting dice")
+                for(var i=0;i<5;i++)
+                {
+                    dice[i].value=0;
+                    vals[i]=0;
+                }
+                render();
+            }
             function checkLock(die){return die.lockedIn;}
             function isSmallStraight(input) {
             
@@ -181,6 +191,11 @@
             function loadScorecard()
             {
                 const ones=document.getElementById("ones");
+                const twos=document.getElementById("twos");
+                const threes=document.getElementById("threes");
+                const fours=document.getElementById("fours");
+                const fives=document.getElementById("fives");
+                const sixes=document.getElementById("sixes");
                 //alert("loading scorecard...");
                 //alert(ones);
                 //alert(document.getElementById("ones"));
@@ -210,6 +225,46 @@
                         //alert("So score should be updated");
                         ones.score=ones.prospectiveScore;
                         ones.lockedIn=true;
+                        //alert("locked in.");
+                        rollsRemaining=3;
+                        //alert("you have "+rollsRemaining+" rolls remaining.");
+                        resetDice();
+                        //alert("dice are now"+dice);
+                        //alert("vals are now"+dice);
+                    }
+                }
+                //repeating for twos:
+                twos.lockedIn=false;
+                twos.score=-1;
+                twos.prospectiveScore=sumWhere(vals,2);
+                twos.onmouseenter=function()
+                {
+                    //alert("mouse entered twos\nprospective score: "+twos.prospectiveScore);
+                    if(twos.prospectiveScore>0&& !twos.lockedIn)
+                    {
+                        twos.style="color: red;";
+                        twos.innerHTML=alignRight(twos.prospectiveScore,3);
+                    }
+                };
+                twos.onmouseleave=function()
+                {
+                    twos.style="color: black;";
+                    twos.innerHTML=alignRight(twos.score,3);
+                };
+                twos.onclick=function()
+                {
+                    //alert("click detected.\nones: "+twos+"\nprospectiveScore: "+twos.prospectiveScore+"\nlockedIn: "+ones.lockedIn);
+                    if(twos.prospectiveScore>0&& !twos.lockedIn)
+                    {
+                        //alert("So score should be updated");
+                        twos.score=twos.prospectiveScore;
+                        twos.lockedIn=true;
+                        //alert("locked in.");
+                        rollsRemaining=3;
+                        //alert("you have "+rollsRemaining+" rolls remaining.");
+                        resetDice();
+                        //alert("dice are now"+dice);
+                        //alert("vals are now"+dice);
                     }
                 }
             }
@@ -217,6 +272,7 @@
             {
                 //alert("rendering scorecard")
                 ones.prospectiveScore=sumWhere(vals,1);
+                twos.prospectiveScore=sumWhere(vals,2);
             }
             function sum(arr)
             {
@@ -229,6 +285,7 @@
             }
             function sumWhere(arr, refNum)
             {
+                //alert("checking how many "+refNum+"s are in "+arr);
                 //Finds the sum of elements of an array matching the reference value.
                 numToCheck=refNum;
                 return sum(arr.filter(checkEqual));
